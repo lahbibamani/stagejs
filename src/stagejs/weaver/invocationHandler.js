@@ -15,7 +15,7 @@ define( function () {
                 });
 
                 //executing target
-                var returnVal=self.target.apply(self.originalInvocationThisPointer, Array.prototype.slice.call(arguments,0));
+                var returnVal=self.target.apply(self.originalThis, Array.prototype.slice.call(arguments,0));
 
                 //after handlers
                 self.after.forEach(function(afterFunc){

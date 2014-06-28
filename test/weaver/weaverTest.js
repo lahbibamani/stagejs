@@ -1,10 +1,10 @@
 var requirejs = require('requirejs');
 
 requirejs.config({
-    baseUrl: '../src/stagejs',
+    baseUrl: '../../src/stagejs',
     nodeRequire: require
 });
-var weaver=requirejs("weaver");
+var weaver=requirejs("weaver/weaver");
 
 var a ={hello:function(){console.log("hello")},bye:function(){console.log("good bye")}};
 var pa =weaver.createProxy(a);
@@ -17,6 +17,8 @@ weaver.addAfter(pa,"bye",function(){console.log("after b")});
 pa.hello();
 pa.bye();
 //TODO Test after returning and after throwing
+
+
 
 
 //var nous = {w: "wadi", a: "amani",c:"success"};

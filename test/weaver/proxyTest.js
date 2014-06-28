@@ -5,7 +5,7 @@ requirejs.config({
     nodeRequire: require
 });
 
-var createProxy=requirejs("proxy");
+var createProxy=requirejs("weaver/proxy");
 var ctx=  createProxy({hello:function(){console.log("hello "+this.name)},name:"wadi"});
 ctx.invocationHandlers["hello"].before.push(function(){console.log("executed b4");});
 ctx.accessHandlers["name"].get.before.push(function(){console.log("executed b4 get name");});

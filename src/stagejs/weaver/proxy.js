@@ -1,4 +1,5 @@
-define(['invocationHandler'], function (InvocationHandler) {
+// todo deep proxy
+define(['weaver/invocationHandler'], function (InvocationHandler) {
 
     var createProxy=function(object){
         var invocationHandlers={};

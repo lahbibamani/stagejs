@@ -5,7 +5,7 @@ requirejs.config({
     nodeRequire: require
 });
 
-var ih=requirejs("invocationHandler");
+var ih=requirejs("weaver/invocationHandler");
 var a =function(){console.log("lol");}
 var ih1= new ih();
 //before and after case

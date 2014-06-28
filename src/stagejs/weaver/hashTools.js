@@ -11,9 +11,11 @@ define( function () {
             return hash;
         },
 
-        toString: function (object) {
+        toString: function (object,cache) {
+
             if (typeof(object) != "object")
                 return String(object);
+            var cache = [];
             var buffer = [];
             for (var att in object) {
                 buffer.push(att);
@@ -23,7 +25,8 @@ define( function () {
         },
 
         objectHash: function (object) {
-            return this.stringHash(this.toString(object));
+            var cache=[];
+            return this.stringHash(this.toString(object,cache));
         }
     }
     return hashTools;

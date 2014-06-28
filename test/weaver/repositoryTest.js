@@ -5,9 +5,11 @@ requirejs.config({
     nodeRequire: require
 });
 
-var hashTools=requirejs("hashTools");
+var repo=requirejs("weaver/repository");
 var a ={name:"a",getName:function(){return a;}};
 var proxy={getName:function(){return a.getName()}};
+repo.add(proxy,a);
 
-console.log(hashTools.objectHash(a));
+//TODO intensive testing for all possible failure cases
 
+console.log(repo.get(proxy));
