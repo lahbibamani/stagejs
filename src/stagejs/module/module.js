@@ -1,52 +1,39 @@
 /**
- * Created by Wadi on 21/06/2014.
+ * Created by Wadi on 30/06/2014.
  */
-define(['../weaver/weaver','../events/eventMix'], function (weaver,EventMix) {
+define(['../weaver/weaver','msgs'], function (weaver,msgs) {
 
     var module=function() {
-        this.view=null;
+        var bus = msgs.bus();
 
-        this.mix=new EventMix();
+        bus.channel('lowercase');
+        bus.transformer(function (message) { return message.toUpperCase(); }, { input: 'lowercase', output: 'uppercase' });
+        bus.channel('uppercase');
+        bus.on('uppercase', function (str) {
+            console.log(str);
+        });
 
-        (function(self){
-            _model=null;
-            Object.defineProperty(self, "model", {
-                    get: function(){return _model;},
-                    set: function(val){
-                        _model=weaver.createProxy(val);
-                        for(var attribute in _model) {
-                            weaver.addAfterSet(_model, attribute, onModelChange);
-                        }
-                    },
-                    enumerable: true,
-                    configurable: true
-                }
-            );
-            var onModelChange=function(){
-                self.render();
-            }
+        bus.send('lowercase', 'hello world'); // 'HELLO WORLD'
+        //string arrays for input and output channels
+        this.in = [];
+        this.out=[];
+        this.initChannels=(function(self){
+            return function(){
+                self.in.forEach(
+                    function(val){
+                        bus.channel(val);
+                    }
+                );
+                self.out.forEach(
+                    function(val){
+                        bus.channel(val);
+                    }
+                );
+            };
         })(this);
 
-        var inputBindings={};
 
-        this.bindInput=function(selector,event,attribute){
-            var module=this;
-            this.view.subscribe(selector,"change",function(evt){
-                module.model[attribute]=evt.target.value;
-            });
 
-            inputBindings[selector]=attribute;
-
-        };
-        this.render=function(){
-            this.view.render(this.model);
-            var module=this.model;
-            for(key in inputBindings){
-                this.view.acceptWithRegion(function($el){
-                   $el.find(key).first().val(module[inputBindings[key]]);
-                })
-            }
-        }
     };
 
     return module;

@@ -13,7 +13,7 @@ requirejs.config({
     }
 });
 
-define(['view/view','lib/jquery','weaver/weaver','module/module'], function (View,$,weaver,Module) {
+define(['view/view','lib/jquery','weaver/weaver','../../controller/controller'], function (View,$,weaver,Module) {
     var module=new Module();
 
     var person={name:"Chemkhi"};
