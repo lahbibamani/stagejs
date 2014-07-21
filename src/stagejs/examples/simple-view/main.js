@@ -15,7 +15,7 @@ requirejs.config({
 
 define(['view/view','lib/jquery','weaver/weaver'], function (View,$,weaver) {
     var view = new View();
-    view.$region=$("#v1");
+    view.$el=$("#v1");
     view.template="Hello {{name}}";
     view.model={name:"Chemkhi"};
 

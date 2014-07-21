@@ -20,7 +20,7 @@ define(['view/view','lib/jquery','weaver/weaver','../../controller/controller'],
     module.model=person;
 
     var view = new View();
-    view.$region=$("#v1");
+    view.$el=$("#v1");
     view.template="<input id='i1' type='text'/> <br/> Hello {{name}}";
 
     module.view=view;
