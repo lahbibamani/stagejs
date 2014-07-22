@@ -4,6 +4,12 @@
 requirejs.config({
     baseUrl: '../../',
     shim: {
+        'lib/underscore':{
+            exports: '_'
+        },
+        'lib/extend':{
+            exports: 'extend'
+        },
         'lib/jquery': {
             exports: '$'
         },
@@ -13,14 +19,14 @@ requirejs.config({
     }
 });
 
-define(['view/view','lib/jquery','weaver/weaver'], function (View,$,weaver) {
-    var view = new View();
-    view.$el=$("#v1");
-    view.template="Hello {{name}}";
-    view.model={name:"Chemkhi"};
+define(['view/view','lib/jquery','weaver/weaver',], function (View,$,weaver) {
+    var HelloWorldView =View.extend({
+        template : "Hello {{name}}"
+    });
+    var context={name:"Stage.js"};
 
-    var pview =weaver.createProxy(view);
-    weaver.addBefore(pview,"render",function(){console.log("B4")});
-    pview.render();
+    var concreteView =new HelloWorldView();
+    concreteView.el="#v1";
+    concreteView.render(context);
 
 });
